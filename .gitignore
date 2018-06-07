@@ -107,6 +107,7 @@ ENV/
 /workflow/output/fastq/
 pipeline_trace*.txt*
 .nextflow*.log*
-report.html
+report.html*
+timeline*.html*
 
 *~
