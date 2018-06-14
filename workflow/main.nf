@@ -6,7 +6,7 @@
 // Define Input variables
 params.bcl = "$baseDir/../test_data/*.tar"
 params.designFile = "$baseDir/../test_data/design.csv"
-params.genome = 'GRCm38'
+
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
@@ -51,7 +51,7 @@ process untarBCL {
   script:
 
   """
-  
+
   tar -xvf $tar
   """
 }
@@ -60,7 +60,7 @@ process untarBCL {
 process mkfastq {
 
   tag "${bcl.baseName}"
-  publishDir "$baseDir/output/fastq/${bcl.baseName}", mode: 'copy' 
+  publishDir "$baseDir/output/fastq/${bcl.baseName}", mode: 'copy'
 
   input:
 
