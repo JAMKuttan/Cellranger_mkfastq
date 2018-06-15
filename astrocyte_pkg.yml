@@ -82,7 +82,7 @@ workflow_parameters:
     required: true
     description: |
       One or more input Tarball BCL files from a sequencing of 10x single-cell expereiment .
-    regex: ".*tar"
+    regex: ".*tar.gz"
     min: 1
 
   - id: designFile

@@ -4,7 +4,7 @@
 // Note - $baseDir is the location of this workflow file main.nf
 
 // Define Input variables
-params.bcl = "$baseDir/../test_data/*.tar"
+params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 
 
