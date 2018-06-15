@@ -100,7 +100,6 @@ ENV/
 
 # nextflow analysis folders/files
 /workflow/.nextflow/
-/test_data/*
 /workflow/work
 /workflow/output/design/
 /workflow/output/bcl/
