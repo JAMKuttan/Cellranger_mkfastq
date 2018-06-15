@@ -52,7 +52,7 @@ process untarBCL {
 
   """
 
-  tar -xvf $tar
+  tar -xzf $tar
   """
 }
 
