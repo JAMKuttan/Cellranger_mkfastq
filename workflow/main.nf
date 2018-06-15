@@ -30,7 +30,7 @@ process checkDesignFile {
   script:
 
   """
-  python $baseDir/scripts/check_design.py -d $params.designFile
+  python3 $baseDir/scripts/check_design.py -d $params.designFile
   """
 }
 
