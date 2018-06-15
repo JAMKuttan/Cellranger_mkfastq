@@ -85,7 +85,7 @@ workflow_parameters:
     regex: ".*tar"
     min: 1
 
-  - id: design
+  - id: designFile
     type: file
     required: true
     regex: ".*csv"
