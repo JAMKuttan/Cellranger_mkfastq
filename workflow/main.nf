@@ -30,7 +30,6 @@ process checkDesignFile {
   script:
 
   """
-  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $params.designFile
   """
 }
@@ -75,8 +74,6 @@ process mkfastq {
   script:
 
   """
-  module load cellranger/2.1.1
-  module bcl2fastq/2.17.1.14
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths
   """
 }
