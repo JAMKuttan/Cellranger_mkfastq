@@ -52,8 +52,8 @@ process untarBCL {
   script:
 
   """
-
-  tar -xzf $tar
+  module load pigz/2.4
+  tar -xvf $tar -I pigz
   """
 }
 
