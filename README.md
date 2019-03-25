@@ -1,3 +1,7 @@
+|*master*|*develop*|
+|:-:|:-:|
+|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/master/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/master)|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/develop/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/develop)|
+
 10x Genomics scRNA-Seq (cellranger) mkfastq Pipeline
 ========================================
 
