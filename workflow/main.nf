@@ -6,14 +6,16 @@
 // Define Input variables
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-
+params.outDir = "$baseDir/output"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
 
-
 // Define regular variables
-
+designLocation = Channel
+  .fromPath(params.designFile)
+  .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
+outDir = params.outDir
 
 process checkDesignFile {
 
@@ -21,11 +23,11 @@ process checkDesignFile {
 
   input:
 
-  params.designFile
+  file designLocation
 
   output:
 
-  file("design.csv") into designPaths
+  file("design.checked.csv") into designPaths
 
   script:
 
@@ -33,7 +35,7 @@ process checkDesignFile {
   hostname
   ulimit -a
   module load python/3.6.1-2-anaconda
-  python3 $baseDir/scripts/check_design.py -d $params.designFile
+  python3 $baseDir/scripts/check_design.py -d $designLocation
   """
 }
 
@@ -65,7 +67,7 @@ process untarBCL {
 process mkfastq {
   tag "${bcl.baseName}"
 
-  publishDir "$outDir/${task.process}/${bcl.baseName}", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
