@@ -17,7 +17,7 @@ tarList = Channel.fromPath( params.bcl )
 
 process checkDesignFile {
 
-  publishDir "$baseDir/output/design", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -30,6 +30,8 @@ process checkDesignFile {
   script:
 
   """
+  hostname
+  ulimit -a
   module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $params.designFile
   """
@@ -39,7 +41,7 @@ process checkDesignFile {
 process untarBCL {
   tag "$tar"
 
-  publishDir "$baseDir/output/bcl", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -52,6 +54,8 @@ process untarBCL {
   script:
 
   """
+  hostname
+  ulimit -a
   module load pigz/2.4
   tar -xvf $tar -I pigz
   """
@@ -59,9 +63,9 @@ process untarBCL {
 
 
 process mkfastq {
-
   tag "${bcl.baseName}"
-  publishDir "$baseDir/output/fastq/${bcl.baseName}", mode: 'copy'
+
+  publishDir "$outDir/${task.process}/${bcl.baseName}", mode: 'copy'
 
   input:
 
@@ -75,8 +79,10 @@ process mkfastq {
   script:
 
   """
-  module load cellranger/2.1.1
-  module load bcl2fastq/2.17.1.14
+  hostname
+  ulimit -a
+  module load cellranger/3.0.2
+  module load bcl2fastq/2.19.1
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths
   """
 }
