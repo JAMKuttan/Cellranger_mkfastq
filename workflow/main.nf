@@ -85,6 +85,6 @@ process mkfastq {
   ulimit -a
   module load cellranger/3.0.2
   module load bcl2fastq/2.19.1
-  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths
+  cellranger mkfastq --nopreflight --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
