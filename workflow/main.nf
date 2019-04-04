@@ -6,32 +6,36 @@
 // Define Input variables
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
-
+params.outDir = "$baseDir/output"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
 
-
 // Define regular variables
-
+designLocation = Channel
+  .fromPath(params.designFile)
+  .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
+outDir = params.outDir
 
 process checkDesignFile {
 
-  publishDir "$baseDir/output/design", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
-  params.designFile
+  file designLocation
 
   output:
 
-  file("design.csv") into designPaths
+  file("design.checked.csv") into designPaths
 
   script:
 
   """
+  hostname
+  ulimit -a
   module load python/3.6.1-2-anaconda
-  python3 $baseDir/scripts/check_design.py -d $params.designFile
+  python3 $baseDir/scripts/check_design.py -d $designLocation
   """
 }
 
@@ -39,7 +43,7 @@ process checkDesignFile {
 process untarBCL {
   tag "$tar"
 
-  publishDir "$baseDir/output/bcl", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -52,6 +56,8 @@ process untarBCL {
   script:
 
   """
+  hostname
+  ulimit -a
   module load pigz/2.4
   tar -xvf $tar -I pigz
   """
@@ -59,9 +65,9 @@ process untarBCL {
 
 
 process mkfastq {
-
   tag "${bcl.baseName}"
-  publishDir "$baseDir/output/fastq/${bcl.baseName}", mode: 'copy'
+
+  publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
@@ -75,8 +81,10 @@ process mkfastq {
   script:
 
   """
-  module load cellranger/2.1.1
-  module load bcl2fastq/2.17.1.14
-  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths
+  hostname
+  ulimit -a
+  module load cellranger/3.0.2
+  module load bcl2fastq/2.19.1
+  cellranger mkfastq --nopreflight --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }

@@ -1,10 +1,14 @@
+|*master*|*develop*|
+|:-:|:-:|
+|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/master/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/master)|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/develop/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/develop)|
+
 10x Genomics scRNA-Seq (cellranger) mkfastq Pipeline
 ========================================
 
 Introduction
 ------------
 
-This pipeline is a wrapper for the cellranger mkfastq tool from 10x Genomics, which is a wrapper for Illumina's bcl2fastq tool. It takes tarballed bcl files from 10x Genomics Single Cell Gene Expression libraries, and untar's and deconvolves them into fastq's.
+This pipeline is a wrapper for the cellranger mkfastq tool from 10x Genomics. It takes bcl files from sequencing of 10x Genomics Single Cell Gene Expression libraries, and deconvolutles the reads by the samples' barcodes.
 
 The pipeline uses Nextflow, a bioinformatics workflow tool.
 
