@@ -58,14 +58,19 @@ process untarBCL {
   """
   hostname
   ulimit -a
-  module load pigz/2.4
-  tar -xvf $tar -I pigz
+  name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
+  if [ "\${name}" == "gz" ];
+  then   module load pigz/2.4;
+  tar -xvf $tar -I pigz;
+  else tar -xvf ${tar};
+  fi;
   """
 }
 
 
 process mkfastq {
   tag "${bcl.baseName}"
+  queue '128GB,256GB,256GBv1,384GB'
 
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -85,6 +90,6 @@ process mkfastq {
   ulimit -a
   module load cellranger/3.0.2
   module load bcl2fastq/2.19.1
-  cellranger mkfastq --nopreflight --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
+  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
