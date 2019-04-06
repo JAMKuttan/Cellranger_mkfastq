@@ -67,7 +67,6 @@ process untarBCL {
   """
 }
 
-
 process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
@@ -82,6 +81,7 @@ process mkfastq {
   output:
 
   file("**/outs/fastq_path/**/*") into fastqPaths
+  file("**/outs/fastq_path/Stats/Stats.json") into qc
 
   script:
 
@@ -91,5 +91,26 @@ process mkfastq {
   module load cellranger/3.0.2
   module load bcl2fastq/2.19.1
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
+  """
+}
+
+process multiqc {
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+
+  file qc
+
+  output:
+
+  file("*") into qcPaths
+
+  script:
+
+  """
+  hostname
+  ulimit -a
+  module load multiqc/1.7
+  multiqc Stats.json
   """
 }
