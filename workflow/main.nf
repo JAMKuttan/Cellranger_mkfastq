@@ -81,7 +81,7 @@ process mkfastq {
   output:
 
   file("**/outs/fastq_path/**/*") into fastqPaths
-  file("**/outs/fastq_path/Stats/Stats.json") into qc
+  file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
 
   script:
 
@@ -94,16 +94,40 @@ process mkfastq {
   """
 }
 
+
+process fastqc {
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+  file("outs/fastq_path/*/*") from fastqPaths
+
+  output:
+
+  file("*fastqc.*") into fqcPaths
+
+  script:
+
+  """
+  hostname
+  ulimit -a
+  module load fastqc/0.11.5
+  module load parallel
+  sh $baseDir/scripts/fastqc.sh
+  """
+}
+
+
 process multiqc {
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
 
-  file qc
+  file bqcPaths
+  file fqcPaths
 
   output:
 
-  file("*") into qcPaths
+  file("*") into mqcPaths
 
   script:
 
@@ -111,6 +135,6 @@ process multiqc {
   hostname
   ulimit -a
   module load multiqc/1.7
-  multiqc Stats.json
+  multiqc .
   """
 }
