@@ -80,7 +80,8 @@ process mkfastq {
 
   output:
 
-  file("**/outs/fastq_path/**/*") into fastqPaths
+  file("**/outs/fastq_path/**/*") into mkfastqPaths
+  file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
 
   script:
@@ -99,7 +100,7 @@ process fastqc {
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
-  file("outs/fastq_path/*/*") from fastqPaths
+  file fastqPaths
 
   output:
 
