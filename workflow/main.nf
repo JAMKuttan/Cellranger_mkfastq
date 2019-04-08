@@ -83,6 +83,7 @@ process mkfastq {
   file("**/outs/fastq_path/**/*") into mkfastqPaths
   file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
+  file("version*.txt") into versionPaths_mkfastq
 
   script:
 
@@ -91,6 +92,7 @@ process mkfastq {
   ulimit -a
   module load cellranger/3.0.2
   module load bcl2fastq/2.19.1
+  sh $baseDir/scripts/versions_mkfastq.sh
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
@@ -105,6 +107,7 @@ process fastqc {
   output:
 
   file("*fastqc.*") into fqcPaths
+  file("version*.txt") into versionPaths_fastqc
 
   script:
 
@@ -118,6 +121,30 @@ process fastqc {
 }
 
 
+process versions {
+  publishDir "$outDir/${task.process}", mode: 'copy'
+
+  input:
+
+  file versionPaths_mkfastq
+  file versionPaths_fastqc
+
+  output:
+
+  file("*.yaml") into yamlPaths
+
+  script:
+
+  """
+  hostname
+  ulimit -a
+  module load python/3.6.1-2-anaconda
+  echo $workflow.nextflow.version > version_nextflow.txt
+  python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
+  """
+}
+
+
 process multiqc {
   publishDir "$outDir/${task.process}", mode: 'copy'
 
@@ -125,6 +152,7 @@ process multiqc {
 
   file bqcPaths
   file fqcPaths
+  file yamlPaths
 
   output:
 
