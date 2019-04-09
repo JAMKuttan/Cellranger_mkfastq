@@ -150,6 +150,8 @@ process versions {
 
 
 process multiqc {
+  queue 'super'
+
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
