@@ -101,6 +101,8 @@ process mkfastq {
 
 
 process fastqc {
+  queue 'super'
+
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
@@ -142,7 +144,6 @@ process versions {
   ulimit -a
   module load python/3.6.1-2-anaconda
   echo $workflow.nextflow.version > version_nextflow.txt
-  python3 $baseDir/scripts/generate_references.py -r $references -o references
   python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
   """
 }
