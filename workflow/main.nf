@@ -7,6 +7,7 @@
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
+params.references = "$baseDir/../docs/references.md"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
@@ -16,6 +17,7 @@ designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
 outDir = params.outDir
+references = params.references
 
 process checkDesignFile {
 
@@ -140,6 +142,7 @@ process versions {
   ulimit -a
   module load python/3.6.1-2-anaconda
   echo $workflow.nextflow.version > version_nextflow.txt
+  python3 $baseDir/scripts/generate_references.py -r $references -o references
   python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
   """
 }
@@ -164,6 +167,6 @@ process multiqc {
   hostname
   ulimit -a
   module load multiqc/1.7
-  multiqc .
+  multiqc . -c $baseDir/scripts/.multiqc_config.yaml 
   """
 }
