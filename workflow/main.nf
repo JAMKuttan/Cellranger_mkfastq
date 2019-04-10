@@ -4,6 +4,7 @@
 // Note - $baseDir is the location of this workflow file main.nf
 
 // Define Input variables
+params.name = "small"
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
@@ -13,6 +14,7 @@ params.references = "$baseDir/../docs/references.md"
 tarList = Channel.fromPath( params.bcl )
 
 // Define regular variables
+name = params.name
 designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
@@ -20,8 +22,8 @@ outDir = params.outDir
 references = params.references
 
 process checkDesignFile {
-  tag "${bcl.baseName}"
-  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
+  tag "$name"
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
 
   input:
 
@@ -99,9 +101,9 @@ process mkfastq {
 
 
 process fastqc {
-  tag "${bcl.baseName}"
+  tag "$name"
   queue 'super'
-  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
 
   input:
   file fastqPaths
@@ -124,8 +126,8 @@ process fastqc {
 
 
 process versions {
-  tag "${bcl.baseName}"
-  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
+  tag "$name"
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
 
   input:
 
@@ -149,9 +151,9 @@ process versions {
 
 
 process multiqc {
-  tag "${bcl.baseName}"
+  tag "$name"
   queue 'super'
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/${task.process}/$name", mode: 'copy'
 
   input:
 
