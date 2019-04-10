@@ -20,8 +20,8 @@ outDir = params.outDir
 references = params.references
 
 process checkDesignFile {
-
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  tag "${bcl.baseName}"
+  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
 
   input:
 
@@ -44,7 +44,6 @@ process checkDesignFile {
 
 process untarBCL {
   tag "$tar"
-
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
@@ -72,7 +71,6 @@ process untarBCL {
 process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
-
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
@@ -101,9 +99,9 @@ process mkfastq {
 
 
 process fastqc {
+  tag "${bcl.baseName}"
   queue 'super'
-
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
 
   input:
   file fastqPaths
@@ -126,7 +124,8 @@ process fastqc {
 
 
 process versions {
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  tag "${bcl.baseName}"
+  publishDir "$outDir/misc/${task.process}/${bcl.baseName}", mode: 'copy'
 
   input:
 
@@ -150,8 +149,8 @@ process versions {
 
 
 process multiqc {
+  tag "${bcl.baseName}"
   queue 'super'
-
   publishDir "$outDir/${task.process}", mode: 'copy'
 
   input:
