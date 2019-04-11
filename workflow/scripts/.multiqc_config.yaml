@@ -1,0 +1,6 @@
+top_modules:
+    - 'Software Versions'
+
+module_order:
+    - bcl2fastq
+    - fastqc
