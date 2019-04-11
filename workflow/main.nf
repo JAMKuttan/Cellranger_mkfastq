@@ -8,7 +8,6 @@ params.name = "small"
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
-params.references = "$baseDir/../docs/references.md"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
@@ -19,7 +18,6 @@ designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
 outDir = params.outDir
-references = params.references
 
 process checkDesignFile {
   tag "$name"
