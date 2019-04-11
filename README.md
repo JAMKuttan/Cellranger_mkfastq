@@ -8,7 +8,9 @@
 Introduction
 ------------
 
-This pipeline is a wrapper for the cellranger mkfastq tool from 10x Genomics. It takes demultiplexes samples from 10x Genomics Single Cell Gene Expression libraries into fastqs.
+This pipeline is a wrapper for the cellranger mkfastq tool from 10x Genomics (which uses Illumina's bcl2fastq). It takes demultiplexes samples from 10x Genomics Single Cell Gene Expression libraries into fastqs.
+
+FastQC is run on the resulting fastq and those reports and bcl2fastq reports are collated with the MultiQC tool.
 
 The pipeline uses Nextflow, a bioinformatics workflow tool.
 
