@@ -1,6 +1,3 @@
-top_modules:
-    - 'Software Versions'
-
 module_order:
     - bcl2fastq
     - fastqc:
@@ -21,3 +18,4 @@ module_order:
         target: ''
         path_filters:
             - '*_R2_*fastqc.zip'
+    - 'Software Versions'

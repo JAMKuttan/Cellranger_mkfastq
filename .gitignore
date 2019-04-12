@@ -310,5 +310,8 @@ report*.html*
 timeline*.html*
 
 *~
+*.tmp
+*.out
+run*.sh
 
 !.gitkeep
