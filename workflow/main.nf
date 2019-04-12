@@ -22,6 +22,7 @@ outDir = params.outDir
 process checkDesignFile {
   tag "$name"
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
+  module 'python/3.6.1-2-anaconda'
 
   input:
 
@@ -36,7 +37,6 @@ process checkDesignFile {
   """
   hostname
   ulimit -a
-  module load python/3.6.1-2-anaconda
   python3 $baseDir/scripts/check_design.py -d $designLocation
   """
 }
@@ -45,6 +45,7 @@ process checkDesignFile {
 process untarBCL {
   tag "$tar"
   publishDir "$outDir/${task.process}", mode: 'copy'
+  module 'pigz/2.4'
 
   input:
 
@@ -61,8 +62,7 @@ process untarBCL {
   ulimit -a
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
-  then   module load pigz/2.4;
-  tar -xvf $tar -I pigz;
+  then tar -xvf ${tar} -I pigz;
   else tar -xvf ${tar};
   fi;
   """
@@ -71,7 +71,8 @@ process untarBCL {
 process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy', pattern: "{*/outs/**/*.fastq.gz}"
+  module 'cellranger/3.0.2:bcl2fastq/2.19.1'
 
   input:
 
@@ -80,7 +81,6 @@ process mkfastq {
 
   output:
 
-  file("**/outs/fastq_path/**/*") into mkfastqPaths
   file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
   file("version*.txt") into versionPaths_mkfastq
@@ -90,8 +90,6 @@ process mkfastq {
   """
   hostname
   ulimit -a
-  module load cellranger/3.0.2
-  module load bcl2fastq/2.19.1
   sh $baseDir/scripts/versions_mkfastq.sh
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
@@ -101,14 +99,15 @@ process mkfastq {
 process fastqc {
   tag "$name"
   queue 'super'
-  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy', pattern: "{*fastqc.zip}"
+  module 'fastqc/0.11.5:parallel'
 
   input:
   file fastqPaths
 
   output:
 
-  file("*fastqc.*") into fqcPaths
+  file("*fastqc.zip") into fqcPaths
   file("version*.txt") into versionPaths_fastqc
 
   script:
@@ -116,9 +115,7 @@ process fastqc {
   """
   hostname
   ulimit -a
-  module load fastqc/0.11.5
-  module load parallel
-  sh $baseDir/scripts/fastqc.sh
+  bash $baseDir/scripts/fastqc.sh
   """
 }
 
@@ -126,6 +123,7 @@ process fastqc {
 process versions {
   tag "$name"
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
+  module 'python/3.6.1-2-anaconda'
 
   input:
 
@@ -141,7 +139,6 @@ process versions {
   """
   hostname
   ulimit -a
-  module load python/3.6.1-2-anaconda
   echo $workflow.nextflow.version > version_nextflow.txt
   python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
   """
@@ -152,6 +149,7 @@ process multiqc {
   tag "$name"
   queue 'super'
   publishDir "$outDir/${task.process}/$name", mode: 'copy'
+  module 'multiqc/1.7'
 
   input:
 
@@ -168,7 +166,6 @@ process multiqc {
   """
   hostname
   ulimit -a
-  module load multiqc/1.7
   multiqc . -c $baseDir/scripts/.multiqc_config.yaml 
   """
 }
