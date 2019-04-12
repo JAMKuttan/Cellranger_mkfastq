@@ -18,4 +18,4 @@ module_order:
         target: ''
         path_filters:
             - '*_R2_*fastqc.zip'
-    - 'Software Versions'
+    - custom_content

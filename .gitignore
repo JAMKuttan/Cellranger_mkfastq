@@ -311,6 +311,7 @@ timeline*.html*
 
 *~
 *.tmp
+*.swp
 *.out
 run*.sh
 
