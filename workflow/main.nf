@@ -71,7 +71,7 @@ process untarBCL {
 process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
-  publishDir "$outDir/${task.process}", mode: 'copy', pattern: "{*.fastq.gz,Stats.json}"
+  publishDir "$outDir/${task.process}", mode: 'copy', pattern: "{*/outs/**/*.fastq.gz}"
   module 'cellranger/3.0.2:bcl2fastq/2.19.1'
 
   input:
@@ -99,8 +99,8 @@ process mkfastq {
 process fastqc {
   tag "$name"
   queue 'super'
-  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
-  module 'fastqc/0.11.5'
+  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy', pattern: "{*fastqc.zip}"
+  module 'fastqc/0.11.5:parallel'
 
   input:
   file fastqPaths
@@ -166,6 +166,6 @@ process multiqc {
   """
   hostname
   ulimit -a
-  multiqc *fastqc.zip -c $baseDir/scripts/.multiqc_config.yaml 
+  multiqc . -c $baseDir/scripts/.multiqc_config.yaml 
   """
 }
