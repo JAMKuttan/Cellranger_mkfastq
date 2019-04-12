@@ -63,7 +63,6 @@ process untarBCL {
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
   then tar -xvf ${tar} -I pigz;
-  rm \${name};
   else tar -xvf ${tar};
   fi;
   """
