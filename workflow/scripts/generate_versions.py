@@ -91,7 +91,7 @@ def main():
     # Dump to YAML
     print(
         '''
-        id: 'Software Versions'
+        id: 'software_versions'
         section_name: 'Software Versions'
         section_href: 'https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/'
         plot_type: 'html'
