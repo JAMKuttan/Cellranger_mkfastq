@@ -9,7 +9,7 @@
 # A unique identifier for the workflow package, text/underscores only
 name: 'cellranger_mkfastq'
 # Who wrote this?
-author: 'Gervaise Henry and Venkat Malladi'
+author: 'Gervaise H. Henry, Venkat Malladi, and Jon Gesell'
 # A contact email address for questions
 email: 'bicf@utsouthwestern.edu'
 # A more informative title for the workflow package
@@ -42,6 +42,9 @@ workflow_modules:
   - 'python/3.6.1-2-anaconda'
   - 'cellranger/2.1.1'
   - 'bcl2fastq/2.17.1.14'
+  - 'fastqc/0.11.5'
+  - 'parallel'
+  - 'multiqc/1.7'
 
 # A list of parameters used by the workflow, defining how to present them,
 # options etc in the web interface. For each parameter:
@@ -81,7 +84,7 @@ workflow_parameters:
     type: files
     required: true
     description: |
-      One or more input tarball (+/- gunzip) basecall files (BCL) from a sequencing of 10x single-cell expereiment (can be .tar or .tar.gz).
+      One or more input tarball (+/- gunzip) basecall files (bcl) from a sequencing of 10x single-cell expereiment (can be .tar or .tar.gz).
     regex: ".*tar*"
     min: 1
 
