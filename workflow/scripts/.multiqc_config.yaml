@@ -3,4 +3,21 @@ top_modules:
 
 module_order:
     - bcl2fastq
-    - fastqc
+    - fastqc:
+        name: 'FastQC (I1)'
+        info: 'This section of the report shows FastQC results for index 1.'
+        target: ''
+        path_filters:
+            - '*_I1_*fastqc.zip'
+    - fastqc:
+        name: 'FastQC (R1)'
+        info: 'This section of the report shows FastQC results for read 1.'
+        target: ''
+        path_filters:
+            - '*_R1_*fastqc.zip'
+    - fastqc:
+        name: 'FastQC (R2)'
+        info: 'This section of the report shows FastQC results for read 2.'
+        target: ''
+        path_filters:
+            - '*_R2_*fastqc.zip'
