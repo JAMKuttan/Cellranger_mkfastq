@@ -84,6 +84,7 @@ process mkfastq {
   file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
   file("version*.txt") into versionPaths_mkfastq
+  val "${bcl.baseName}" into bclName
 
   script:
 
@@ -97,9 +98,9 @@ process mkfastq {
 
 
 process fastqc {
-  tag "$name"
+  tag "$bclName"
   queue 'super'
-  publishDir "$outDir/misc/${task.process}/$name", mode: 'copy', pattern: "{*fastqc.zip}"
+  publishDir "$outDir/misc/${task.process}", mode: 'copy', pattern: "{*fastqc.zip}"
   module 'fastqc/0.11.5:parallel'
 
   input:
@@ -146,9 +147,9 @@ process versions {
 
 
 process multiqc {
-  tag "$name"
+  tag "$bclName}"
   queue 'super'
-  publishDir "$outDir/${task.process}/$name", mode: 'copy'
+  publishDir "$outDir/${task.process}", mode: 'copy'
   module 'multiqc/1.7'
 
   input:
