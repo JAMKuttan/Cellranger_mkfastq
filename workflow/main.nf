@@ -166,6 +166,6 @@ process multiqc {
   """
   hostname
   ulimit -a
-  multiqc . -c $baseDir/scripts/.multiqc_config.yaml 
+  multiqc . -c $baseDir/config/multiqc_config.yaml 
   """
 }
