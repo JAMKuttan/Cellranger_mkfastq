@@ -100,11 +100,12 @@ process mkfastq {
 process fastqc {
   tag "$bclName"
   queue 'super'
-  publishDir "$outDir/misc/${task.process}", mode: 'copy', pattern: "{*fastqc.zip}"
+  publishDir "$outDir/misc/${task.process}/$name/$bclName", mode: 'copy', pattern: "{*fastqc.zip}"
   module 'fastqc/0.11.5:parallel'
 
   input:
   file fastqPaths
+  val bclName
 
   output:
 
@@ -147,9 +148,9 @@ process versions {
 
 
 process multiqc {
-  tag "$bclName}"
+  tag "$name"
   queue 'super'
-  publishDir "$outDir/${task.process}", mode: 'copy'
+  publishDir "$outDir/${task.process}/$name", mode: 'copy'
   module 'multiqc/1.7'
 
   input:
