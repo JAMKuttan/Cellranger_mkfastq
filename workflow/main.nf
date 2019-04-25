@@ -146,6 +146,9 @@ process versions {
   """
 }
 
+bqcPathsAll = Channel
+  .from(bqcPaths)
+  .collect()
 
 process multiqc {
   tag "$name"
@@ -155,7 +158,7 @@ process multiqc {
 
   input:
 
-  file bqcPaths
+  file bqcPathsAll
   file fqcPaths
   file yamlPaths
 
