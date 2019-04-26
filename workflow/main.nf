@@ -4,7 +4,7 @@
 // Note - $baseDir is the location of this workflow file main.nf
 
 // Define Input variables
-params.name = "small"
+params.name = "run"
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
@@ -114,7 +114,9 @@ process fastqc {
   """
   hostname
   ulimit -a
+  find *.fastq.gz -exec mv {} $bclName.{} \\;
   bash $baseDir/scripts/fastqc.sh
+  
   """
 }
 
@@ -125,7 +127,6 @@ process versions {
   module 'python/3.6.1-2-anaconda:cellranger/3.0.2:bcl2fastq/2.19.1:fastqc/0.11.5'
 
   input:
-
 
   output:
 
@@ -146,13 +147,13 @@ process versions {
 process multiqc {
   tag "$name"
   queue 'super'
-  publishDir "$outDir/${task.process}/$name", mode: 'copy'
+  publishDir "$outDir/${task.process}/$name", mode: 'copy', pattern: "{multiqc*}"
   module 'multiqc/1.7'
 
   input:
 
   file bqc name "bqc/?/*" from bqcPaths.collect()
-  file fqc name "fqc/?/*" from fqcPaths.collect()
+  file fqc name "fqc/*" from fqcPaths.collect()
   file yamlPaths
 
   output:
