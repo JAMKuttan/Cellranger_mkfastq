@@ -4,8 +4,8 @@ before_script:
   - module load nextflow/0.31.1_Ignite
   - mkdir -p test_data/simple1
   - mkdir -p test_data/simple2
-  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple1/* test_data/simple1/
-  - ln -s /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple2/* test_data/simple2/
+  - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple1/* test_data/simple1/
+  - ln -sfn /project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple2/* test_data/simple2/
 
 stages:
   - astrocyte
