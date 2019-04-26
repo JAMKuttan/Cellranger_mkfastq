@@ -37,7 +37,7 @@ process checkDesignFile {
   """
   hostname
   ulimit -a
-  python3 $baseDir/scripts/check_design.py -d $designLocation
+  python3 "$baseDir/scripts/check_design.py" -d "$designLocation"
   """
 }
 
@@ -62,8 +62,8 @@ process untarBCL {
   ulimit -a
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
-  then tar -xvf $tar -I pigz;
-  else tar -xvf $tar;
+  then tar -xvf "$tar" -I pigz;
+  else tar -xvf "$tar";
   fi;
   """
 }
@@ -91,7 +91,7 @@ process mkfastq {
   """
   hostname
   ulimit -a
-  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
+  cellranger mkfastq --id="${bcl.baseName}" --run="$bcl" --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
 
@@ -115,7 +115,7 @@ process fastqc {
   hostname
   ulimit -a
   find *.fastq.gz -exec mv {} $bclName.{} \\;
-  bash $baseDir/scripts/fastqc.sh
+  bash "$baseDir/scripts/fastqc.sh"
   
   """
 }
@@ -138,9 +138,9 @@ process versions {
   hostname
   ulimit -a
   echo $workflow.nextflow.version > version_nextflow.txt
-  sh $baseDir/scripts/versions_mkfastq.sh
-  bash $baseDir/scripts/versions_fastqc.sh
-  python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
+  bash "$baseDir/scripts/versions_mkfastq.sh"
+  bash "$baseDir/scripts/versions_fastqc.sh"
+  python3 "$baseDir/scripts/generate_versions.py" -f version_*.txt -o versions
   """
 }
 
@@ -165,6 +165,6 @@ process multiqc {
   """
   hostname
   ulimit -a
-  multiqc . -c $baseDir/conf/multiqc_config.yaml 
+  multiqc . -c "$baseDir/conf/multiqc_config.yaml"
   """
 }
