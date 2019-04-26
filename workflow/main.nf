@@ -84,7 +84,6 @@ process mkfastq {
 
   file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
-  file("version*.txt") into versionPaths_mkfastq
   val "${bcl.baseName}" into bclName
 
   script:
@@ -92,7 +91,6 @@ process mkfastq {
   """
   hostname
   ulimit -a
-  sh $baseDir/scripts/versions_mkfastq.sh
   cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
@@ -110,7 +108,6 @@ process fastqc {
   output:
 
   file("*fastqc.zip") into fqcPaths
-  file("version*.txt") into versionPaths_fastqc
 
   script:
 
@@ -125,12 +122,10 @@ process fastqc {
 process versions {
   tag "$name"
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
-  module 'python/3.6.1-2-anaconda'
+  module 'python/3.6.1-2-anaconda:cellranger/3.0.2:bcl2fastq/2.19.1:fastqc/0.11.5'
 
   input:
 
-  file versionPaths_mkfastq
-  file versionPaths_fastqc
 
   output:
 
@@ -142,13 +137,11 @@ process versions {
   hostname
   ulimit -a
   echo $workflow.nextflow.version > version_nextflow.txt
+  sh $baseDir/scripts/versions_mkfastq.sh
+  bash $baseDir/scripts/versions_fastqc.sh
   python3 $baseDir/scripts/generate_versions.py -f version_*.txt -o versions
   """
 }
-
-bqcPathsAll = Channel
-  .from(bqcPaths)
-  .collect()
 
 process multiqc {
   tag "$name"
@@ -158,8 +151,8 @@ process multiqc {
 
   input:
 
-  file bqcPathsAll
-  file fqcPaths
+  file bqc name "bqc/?/*" from bqcPaths.collect()
+  file fqc name "fqc/?/*" from fqcPaths.collect()
   file yamlPaths
 
   output:
