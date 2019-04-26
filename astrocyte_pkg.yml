@@ -91,7 +91,7 @@ workflow_parameters:
   - id: designFile
     type: file
     required: true
-    regex: "*.csv"
+    regex: ".*csv"
     description: |
       A design file listing lane, sample, corresponding index.
 
