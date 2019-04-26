@@ -1,4 +1,4 @@
-# v1.1.1
+# v1.1.3
 ### User Facing
 * Fix design file not visible in Astrocyte
 * Fix handling of multiple flowcells in 1 submission
