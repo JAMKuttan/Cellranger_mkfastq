@@ -53,7 +53,7 @@ process untarBCL {
 
   output:
 
-  file("*") into bclPaths
+  file("*") into bclPaths mode flatten
 
   script:
 
@@ -62,11 +62,12 @@ process untarBCL {
   ulimit -a
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
-  then tar -xvf ${tar} -I pigz;
-  else tar -xvf ${tar};
+  then tar -xvf $tar -I pigz;
+  else tar -xvf $tar;
   fi;
   """
 }
+
 
 process mkfastq {
   tag "${bcl.baseName}"
@@ -76,8 +77,8 @@ process mkfastq {
 
   input:
 
-  val bcl from bclPaths
-  file designPaths
+  each bcl from bclPaths.collect()
+  file design from designPaths
 
   output:
 
@@ -92,10 +93,9 @@ process mkfastq {
   hostname
   ulimit -a
   sh $baseDir/scripts/versions_mkfastq.sh
-  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$designPaths -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
+  cellranger mkfastq --id="${bcl.baseName}" --run=$bcl --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
-
 
 process fastqc {
   tag "$bclName"
