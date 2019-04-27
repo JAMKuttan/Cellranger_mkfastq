@@ -30,5 +30,6 @@ simple_1FC:
 simple_2FC:
   stage: simple
   script:
-  - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"  artifacts:
+  - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
+  artifacts:
     expire_in: 2 days
