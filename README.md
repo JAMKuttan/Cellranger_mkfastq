@@ -2,6 +2,8 @@
 |:-:|:-:|
 |[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/master/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/master)|[![Build Status](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/badges/develop/build.svg)](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/commits/develop)|
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2652611.svg)](https://doi.org/10.5281/zenodo.2652611)
+
 10x Genomics scRNA-Seq (cellranger) mkfastq Pipeline
 ==================================================
 
