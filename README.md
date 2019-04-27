@@ -37,6 +37,7 @@ To Run:
         * column 2 = "Sample" (sample name)
         * column 3 = "Index" (10x sample index barcode, eg SI-GA-A1)
         * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
+        * can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/docs/design.csv)
         * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple/cellranger-tiny-bcl-simple-1_2_0.csv'**
     * **--outDir**
         * optional output directory for run
@@ -50,3 +51,6 @@ To Run:
 | Lane | Sample      | Index     |
 |------|-------------|-----------|
 | *    | test_sample | SI-P03-C9 |
+
+
+[**CHANGELOG**](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/CHANGELOG.md)
