@@ -25,6 +25,10 @@ simple_1FC:
   script:
   - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
   artifacts:
+    name: "$CI_JOB_NAME"
+    when: on_failure
+    paths:
+    - binaries/
     expire_in: 2 days
 
 simple_2FC:
@@ -32,4 +36,8 @@ simple_2FC:
   script:
   - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
   artifacts:
+    name: "$CI_JOB_NAME"
+    when: on_failure
+    paths:
+      - binaries/
     expire_in: 2 days
