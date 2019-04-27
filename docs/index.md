@@ -15,16 +15,16 @@ To Run:
 
 * Workflow parameters:
   * **bcl**
-        * Base call files (tarballed [*.tar] +/- gunzipping [*.tar.gz] from a sequencing of 10x single-cell expereiment, supports pigr parallelization).
-        * There can be multiple basecall files, but they all will be demultiplexed by the same design file.
-        * REQUIRED
+    * Base call files (tarballed [*.tar] +/- gunzipping [*.tar.gz] from a sequencing of 10x single-cell expereiment, supports pigr parallelization).
+    * There can be multiple basecall files, but they all will be demultiplexed by the same design file.
+    * REQUIRED
   * **design file**
-        * A design file listing lane, sample, corresponding sample barcode. There can be multiple rows with the same sample name, if there are multiple fastq's for that sample.
-        * REQUIRED
-        * column 1 = "Lane" (number of lanes to demultiplex, */** for all lanes)
-        * column 2 = "Sample" (sample name)
-        * column 3 = "Index" (10x sample index barcode, eg SI-GA-A1)
-        * eg: can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/docs/design.csv)
+    * A design file listing lane, sample, corresponding sample barcode. There can be multiple rows with the same sample name, if there are multiple fastq's for that sample.
+    * REQUIRED
+    * column 1 = "Lane" (number of lanes to demultiplex, */** for all lanes)
+    * column 2 = "Sample" (sample name)
+    * column 3 = "Index" (10x sample index barcode, eg SI-GA-A1)
+    * eg: can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/docs/design.csv)
 
 
 * Design example:
