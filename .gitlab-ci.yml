@@ -18,6 +18,8 @@ astrocyte_check:
 
 simple_1FC:
   stage: simple
+  except:
+    - tags
   script:
   - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
 
