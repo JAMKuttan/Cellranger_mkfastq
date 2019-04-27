@@ -24,7 +24,7 @@ To Run:
         * column 1 = "Lane" (number of lanes to demultiplex, */** for all lanes)
         * column 2 = "Sample" (sample name)
         * column 3 = "Index" (10x sample index barcode, eg SI-GA-A1)
-        * eg: can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/docs/design.csv)
+        * eg: can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/docs/design.csv)
 
 
 * Design example:
@@ -34,6 +34,8 @@ To Run:
     | *    | test_sample | SI-P03-C9 |
     
 
+
+[**CHANGELOG**](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/CHANGELOG.md)
 
 Credits
 -------
