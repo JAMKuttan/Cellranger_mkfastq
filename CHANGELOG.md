@@ -3,6 +3,8 @@
 
 **Background**
 * Add DOI
+* Add changelog as link to astrocyte docs (master branch)
+* Update example design file link in astrocyte docs (master branch)
 
 *Known Bugs*
 
