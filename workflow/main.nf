@@ -37,7 +37,11 @@ process checkDesignFile {
   """
   hostname
   ulimit -a
-  python3 "$baseDir/scripts/check_design.py" -d "$designLocation"
+  dL=`echo "$designLocation" | tr -d ' '`
+  if [ "$designLocation" != "\$dL" ]
+  then mv "$designLocation" "\$dL"
+  fi
+  python3 "$baseDir/scripts/check_design.py" -d "\$dL"
   """
 }
 
@@ -60,10 +64,16 @@ process untarBCL {
   """
   hostname
   ulimit -a
+  
+  tar_no=`echo "${tar}" | tr -d ' '`
+  if [ "${tar}" != "\${tar_no}" ]
+  then  mv "${tar}" "\${tar_no}"
+  fi
+
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
-  then tar -xvf "$tar" -I pigz;
-  else tar -xvf "$tar";
+  then tar -xvf "\$tar_no" -I pigz;
+  else tar -xvf "\$tar_no";
   fi;
   """
 }
