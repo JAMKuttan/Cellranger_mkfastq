@@ -38,7 +38,10 @@ process checkDesignFile {
   hostname
   ulimit -a
   dL=`echo "$designLocation" | tr -d ' '`
-  if [ "$designLocation" != "\$dL" ]
+  if [ `dirname "$designLocation"` != `dirname "\$dL"` ]
+  then echo "Error: Spaces Found in Design Directory Path"
+  exit 5
+  elif [ `basename "$designLocation"` != `basename "\$dL"` ] 
   then mv "$designLocation" "\$dL"
   fi
   python3 "$baseDir/scripts/check_design.py" -d "\$dL"
@@ -66,8 +69,11 @@ process untarBCL {
   ulimit -a
   
   tar_no=`echo "${tar}" | tr -d ' '`
-  if [ "${tar}" != "\${tar_no}" ]
-  then  mv "${tar}" "\${tar_no}"
+  if [ `dirname "${tar}"` != `dirname "\${tar_no}"` ]
+  then echo "Error: Spaces Found in BCL Directory Path"
+  exit 5
+  elif [ `basename "${tar}"` != `basename "\$dL"` ]
+  then mv "${tar}" "\${tar_no}"
   fi
 
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
