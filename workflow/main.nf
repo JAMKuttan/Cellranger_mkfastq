@@ -91,17 +91,20 @@ process mkfastq {
   """
   hostname
   ulimit -a
- 
-  bcl_no=`readlink -e "${bcl}" | tr -d ' '`
+  
+  bcl_no=`readlink -e "$bcl" | tr -d ' '`
   if [ `dirname "${bcl}"` != `dirname "\${bcl_no}"` ]
   then echo "Error: Spaces Found in BCL Directory Path"
-  exit 5
+  exit 13 
   fi
-
+  
+  dL0=`readlink -e "$design"`
   dL=`readlink -e "$design" | tr -d ' '`
-  if [ `dirname "$design"` != `dirname "\$dL"` ]
+  echo "\$dL"
+  echo "\$dL0"
+  if [ `dirname "\$dL0"` != `dirname "\$dL"` ]
   then echo "Error: Spaces Found in Design Directory Path"
-  exit 5
+  exit 13
   fi
 
   cellranger mkfastq --id="${bcl.baseName}" --run="$bcl" --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
