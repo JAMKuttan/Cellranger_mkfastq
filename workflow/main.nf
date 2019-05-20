@@ -37,14 +37,7 @@ process checkDesignFile {
   """
   hostname
   ulimit -a
-  dL=`echo "$designLocation" | tr -d ' '`
-  if [ `dirname "$designLocation"` != `dirname "\$dL"` ]
-  then echo "Error: Spaces Found in Design Directory Path"
-  exit 5
-  elif [ `basename "$designLocation"` != `basename "\$dL"` ] 
-  then mv "$designLocation" "\$dL"
-  fi
-  python3 "$baseDir/scripts/check_design.py" -d "\$dL"
+  python3 "$baseDir/scripts/check_design.py" -d "$designLocation"
   """
 }
 
@@ -67,19 +60,10 @@ process untarBCL {
   """
   hostname
   ulimit -a
-  
-  tar_no=`echo "${tar}" | tr -d ' '`
-  if [ `dirname "${tar}"` != `dirname "\${tar_no}"` ]
-  then echo "Error: Spaces Found in BCL Directory Path"
-  exit 5
-  elif [ `basename "${tar}"` != `basename "\$dL"` ]
-  then mv "${tar}" "\${tar_no}"
-  fi
-
   name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
-  then tar -xvf "\$tar_no" -I pigz;
-  else tar -xvf "\$tar_no";
+  then tar -xvf "$tar" -I pigz;
+  else tar -xvf "$tar";
   fi;
   """
 }
@@ -107,6 +91,19 @@ process mkfastq {
   """
   hostname
   ulimit -a
+ 
+  bcl_no=`readlink -e "${bcl}" | tr -d ' '`
+  if [ `dirname "${bcl}"` != `dirname "\${bcl_no}"` ]
+  then echo "Error: Spaces Found in BCL Directory Path"
+  exit 5
+  fi
+
+  dL=`readlink -e "$design" | tr -d ' '`
+  if [ `dirname "$design"` != `dirname "\$dL"` ]
+  then echo "Error: Spaces Found in Design Directory Path"
+  exit 5
+  fi
+
   cellranger mkfastq --id="${bcl.baseName}" --run="$bcl" --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
