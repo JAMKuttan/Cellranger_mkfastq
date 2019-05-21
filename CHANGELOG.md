@@ -5,6 +5,7 @@
 * Add DOI
 * Add changelog as link to astrocyte docs (master branch)
 * Update example design file link in astrocyte docs (master branch)
+* Check tarballed bcl directory for spaces and exit if it contains one...cellranger mkfastq cannot handle spaces (develop branch)
 
 *Known Bugs*
 
