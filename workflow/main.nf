@@ -60,14 +60,22 @@ process untarBCL {
   """
   hostname
   ulimit -a
-  name=`echo ${tar} | rev | cut -f1 -d '.' | rev`;
+ 
+  folder=\$(tar -tf "$tar" | grep -o "^[^/]*/\$")
+  folder1=`echo "\$folder" | tr -d ' '`
+  if [ "\$folder" != "\$folder1" ]
+  then echo "Error: Spaces found in BCL Directory Path"
+  echo "\$folder"
+  exit 21
+  fi
+
+  name=`echo "${tar}" | rev | cut -f1 -d '.' | rev`;
   if [ "\${name}" == "gz" ];
   then tar -xvf "$tar" -I pigz;
   else tar -xvf "$tar";
   fi;
   """
 }
-
 
 process mkfastq {
   tag "${bcl.baseName}"
@@ -90,7 +98,7 @@ process mkfastq {
 
   """
   hostname
-  ulimit -a
+  ulimit -a  
   cellranger mkfastq --id="${bcl.baseName}" --run="$bcl" --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
 }
