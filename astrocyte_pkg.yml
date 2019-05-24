@@ -9,7 +9,7 @@
 # A unique identifier for the workflow package, text/underscores only
 name: 'cellranger_mkfastq'
 # Who wrote this?
-author: 'Gervaise H. Henr, Jon Gesell, Jeremy Mathews and Venkat Malladi'
+author: 'Gervaise H. Henr, Jon Gesell, Jeremy Mathews, and Venkat Malladi'
 # A contact email address for questions
 email: 'bicf@utsouthwestern.edu'
 # A more informative title for the workflow package
