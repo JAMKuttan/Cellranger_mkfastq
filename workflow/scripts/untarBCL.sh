@@ -15,7 +15,6 @@ done
 
 shift $(($OPTIND -1));
 
-echo "This Line"
 folder=$(tar -tf '$tar' | grep -o "^[^/]*/\$");
 folder1=`echo "$folder" | tr -d ' '`;
 
