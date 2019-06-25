@@ -30,7 +30,7 @@ To Run:
   * **--bcl**
         * Base call files (tarballed [*.tar] +/- gunzipping [*.tar.gz] from a sequencing of 10x single-cell expereiment, supports pigr parallelization).
         * There can be multiple basecall files, but they all will be demultiplexed by the same design file.
-        * eg: **--bcl '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple/cellranger-tiny-bcl-simple-1_2_0.tar.gz'**
+        * eg: **--bcl '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple1/cellranger-tiny-bcl-1_2_0.tar.gz'**
   * **--designFile**
         * path to design file (csv format) location
         * column 1 = "Lane" (number of lanes to demultiplex, */** for all lanes)
@@ -44,7 +44,7 @@ To Run:
         * eg: **--outDir 'test'**
     * FULL EXAMPLE:
 
-**nextflow run workflow/main.nf --name 'test' --bcl '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple/cellranger-tiny-bcl-simple-1_2_0.tar.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple/cellranger-tiny-bcl-simple-1_2_0.csv' --outDir 'test'**
+**nextflow run workflow/main.nf --name 'test' --bcl '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple1/cellranger-tiny-bcl-1_2_0.tar.gz' --designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple1/cellranger-tiny-bcl-simple-1_2_0.csv' --outDir 'test'**
 
 * Design example:
 
