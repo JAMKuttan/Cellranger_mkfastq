@@ -8,6 +8,7 @@ params.name = "run"
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
+params.references = "$baseDir/../docs/references.md"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
@@ -18,6 +19,7 @@ designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
 outDir = params.outDir
+references = params.references
 
 process checkDesignFile {
   tag "$name"
@@ -119,7 +121,7 @@ process fastqc {
 process versions {
   tag "$name"
   publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
-  module 'python/3.6.1-2-anaconda:cellranger/3.0.2:bcl2fastq/2.19.1:fastqc/0.11.5'
+  module 'python/3.6.1-2-anaconda:cellranger/3.0.2:bcl2fastq/2.19.1:fastqc/0.11.5:pandoc/2.7'
 
   input:
 
@@ -136,6 +138,7 @@ process versions {
   bash "$baseDir/scripts/versions_mkfastq.sh"
   bash "$baseDir/scripts/versions_fastqc.sh"
   python3 "$baseDir/scripts/generate_versions.py" -f version_*.txt -o versions
+  python3 "$baseDir/scripts/generate_references.py" -r "$references" -o references
   """
 }
 
