@@ -19,3 +19,9 @@ module_order:
         path_filters:
             - '*_R2_*fastqc.zip'
     - custom_content
+
+report_section_order:
+    Software_Versions:
+      order: -1100
+    Software_References:
+      order: -1200
