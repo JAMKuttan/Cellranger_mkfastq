@@ -3,13 +3,16 @@
 1. **python**:
   * Anaconda (Anaconda Software Distribution, [https://anaconda.com](https://anaconda.com))
 
-2. **pigz**
-  * pigz [https://zlib.net/pigz/](https://zlib.net/pigz/)
+2. **pigz**:
+  * parallel implementation of gzip [https://zlib.net/pigz/](https://zlib.net/pigz/)
 
-3. **cellranger**
-  * Cellranger mkfastq [https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/mkfastq](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/mkfastq)
+3. **bcl2fastq**:
+  * Ilumina's bcl2fastq [https://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html](https://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html)
 
-4. **fastqc**
+3. **cellranger**:
+  * 10x Genomics cellranger mkfastq [https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/mkfastq](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/mkfastq)
+
+4. **fastqc**:
   * fastqc [https://www.bioinformatics.babraham.ac.uk/projects/fastqc/](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
 5. **MultiQc**:
