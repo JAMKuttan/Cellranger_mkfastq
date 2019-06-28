@@ -9,6 +9,7 @@
 * Move untar (including space check) to bash script
 * Add Jeremy Mathews to author list
 * Add references to of tools to mutiQC report
+* Add BICF details to multiqc report
 
 *Known Bugs*
 * cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
