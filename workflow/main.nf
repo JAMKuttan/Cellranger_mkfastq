@@ -143,7 +143,7 @@ process multiqc {
   file yamlPaths
 
   output:
-  file("*") into mqcPaths
+  file("multiqc_report.html") into mqcPaths
 
   script:
   """
