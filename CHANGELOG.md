@@ -1,5 +1,7 @@
 # v1.2.0 (in development)
 **User Facing**
+* Add references to of tools to mutiQC report
+* Add BICF details to multiqc report
 
 **Background**
 * Add DOI (develop branch)
@@ -8,8 +10,6 @@
 * Check tarballed bcl directory for spaces and exit if it contains one...cellranger mkfastq cannot handle spaces (develop branch)
 * Move untar (including space check) to bash script
 * Add Jeremy Mathews to author list
-* Add references to of tools to mutiQC report
-* Add BICF details to multiqc report
 
 *Known Bugs*
 * cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
