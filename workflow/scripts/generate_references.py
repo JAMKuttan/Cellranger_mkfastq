@@ -54,7 +54,7 @@ def main():
 
     # Header for HTML
     print('''
-        id: 'Software References'
+        id: 'software_references'
         section_name: 'Software References'
         description: 'This section describes references for the tools used.'
         plot_type: 'html'

@@ -8,6 +8,7 @@ params.name = "run"
 params.bcl = "$baseDir/../test_data/*.tar.gz"
 params.designFile = "$baseDir/../test_data/design.csv"
 params.outDir = "$baseDir/output"
+params.multiqcConf = "$baseDir/conf/multiqc_config.yaml"
 params.references = "$baseDir/../docs/references.md"
 
 // Define List of Files
@@ -19,6 +20,7 @@ designLocation = Channel
   .fromPath(params.designFile)
   .ifEmpty { exit 1, "design file not found: ${params.designFile}" }
 outDir = params.outDir
+multiqcConf = params.multiqcConf
 references = params.references
 
 process checkDesignFile {
@@ -27,15 +29,12 @@ process checkDesignFile {
   module 'python/3.6.1-2-anaconda'
 
   input:
-
   file designLocation
 
   output:
-
   file("design.checked.csv") into designPaths
 
   script:
-
   """
   hostname
   ulimit -a
@@ -50,15 +49,12 @@ process untarBCL {
   module 'pigz/2.4'
 
   input:
-
   file tar from tarList
 
   output:
-
   file("*") into bclPaths mode flatten
 
   script:
-
   """
   hostname
   ulimit -a
@@ -73,18 +69,15 @@ process mkfastq {
   module 'cellranger/3.0.2:bcl2fastq/2.19.1'
 
   input:
-
   each bcl from bclPaths.collect()
   file design from designPaths
 
   output:
-
   file("**/outs/**/*.fastq.gz") into fastqPaths
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
   val "${bcl.baseName}" into bclName
 
   script:
-
   """
   hostname
   ulimit -a  
@@ -103,11 +96,9 @@ process fastqc {
   val bclName
 
   output:
-
   file("*fastqc.zip") into fqcPaths
 
   script:
-
   """
   hostname
   ulimit -a
@@ -126,11 +117,9 @@ process versions {
   input:
 
   output:
-
   file("*.yaml") into yamlPaths
 
   script:
-
   """
   hostname
   ulimit -a
@@ -149,20 +138,17 @@ process multiqc {
   module 'multiqc/1.7'
 
   input:
-
   file bqc name "bqc/?/*" from bqcPaths.collect()
   file fqc name "fqc/*" from fqcPaths.collect()
   file yamlPaths
 
   output:
-
   file("*") into mqcPaths
 
   script:
-
   """
   hostname
   ulimit -a
-  multiqc . -c "$baseDir/conf/multiqc_config.yaml"
+  multiqc -c $multiqcConf .
   """
 }
