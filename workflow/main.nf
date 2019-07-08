@@ -12,10 +12,11 @@ params.multiqcConf = "$baseDir/conf/multiqc_config.yaml"
 params.references = "$baseDir/../docs/references.md"
 
 // Define List of Files
-tarList = Channel.fromPath( params.bcl )
+tarList = Channel
+  .fromPath( params.bcl )
 bclCount = Channel
-	.fromPath( params.bcl )
-	.count()
+  .fromPath( params.bcl )
+  .count()
 
 // Define regular variables
 name = params.name
@@ -25,6 +26,7 @@ designLocation = Channel
 outDir = params.outDir
 multiqcConf = params.multiqcConf
 references = params.references
+
 
 process checkDesignFile {
   tag "$name"
@@ -66,6 +68,7 @@ process untarBCL {
   """
 }
 
+
 process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
@@ -90,6 +93,7 @@ process mkfastq {
   """
 }
 
+
 if (bclCount.value == 1) {
   process countDesign {
     tag "$name"
@@ -108,6 +112,7 @@ if (bclCount.value == 1) {
     """
   }
 }
+
 
 process fastqc {
   tag "$bclName"
@@ -128,7 +133,6 @@ process fastqc {
   ulimit -a
   find *.fastq.gz -exec mv {} $bclName.{} \\;
   bash "$baseDir/scripts/fastqc.sh"
-  
   """
 }
 
@@ -154,6 +158,7 @@ process versions {
   python3 "$baseDir/scripts/generate_references.py" -r "$references" -o references
   """
 }
+
 
 process multiqc {
   tag "$name"
