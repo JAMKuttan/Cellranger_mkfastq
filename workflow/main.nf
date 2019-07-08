@@ -11,6 +11,9 @@ params.outDir = "$baseDir/output"
 
 // Define List of Files
 tarList = Channel.fromPath( params.bcl )
+bclCount = Channel
+	.fromPath( params.bcl )
+	.count()
 
 // Define regular variables
 name = params.name
@@ -31,6 +34,7 @@ process checkDesignFile {
   output:
 
   file("design.checked.csv") into designPaths
+  file("design.checked.csv") into designCount
 
   script:
 
@@ -71,23 +75,40 @@ process mkfastq {
   module 'cellranger/3.0.2:bcl2fastq/2.19.1'
 
   input:
-
   each bcl from bclPaths.collect()
   file design from designPaths
 
   output:
-
   file("**/outs/**/*.fastq.gz") into fastqPaths
+  file("**/outs/**/*.fastq.gz") into cellrangerCount
   file("**/outs/fastq_path/Stats/Stats.json") into bqcPaths
   val "${bcl.baseName}" into bclName
 
   script:
-
   """
   hostname
   ulimit -a  
   cellranger mkfastq --id="${bcl.baseName}" --run="$bcl" --csv=$design -r \$SLURM_CPUS_ON_NODE  -p \$SLURM_CPUS_ON_NODE  -w \$SLURM_CPUS_ON_NODE 
   """
+}
+
+if (bclCount.value == 1) {
+  process countDesign {
+    tag "$name"
+    publishDir "$outDir/misc/${task.process}/$name", mode: 'copy'
+
+    input:
+    file fastqs from cellrangerCount.collect()
+    file design from designCount
+
+    output:
+    file("Cellranger_Count_Design.csv") into CountDesign
+
+    script:
+    """
+    bash "$baseDir/scripts/countDesign.sh"
+    """
+  }
 }
 
 process fastqc {
