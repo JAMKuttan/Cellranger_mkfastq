@@ -2,6 +2,7 @@
 **User Facing**
 * Add references to of tools to mutiQC report
 * Add BICF details to multiqc report
+* Create cellranger_count design file (if only 1 flowcell is inputted)
 
 **Background**
 * Add DOI (develop branch)
@@ -13,8 +14,10 @@
 
 *Known Bugs*
 * cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
-  note: 10x doesn't check github issues, emailed instead
-  note: pipeline checks for spaces and exits prematurely if found
+    * note: 10x doesn't check github issues, emailed instead
+    * note: pipeline checks for spaces and exits prematurely if found
+* If multiple flowcells (tar'd) files are inputted then there will be multiple fastq's by the same name, currently dealing with that name conflict is not tractable
+    * note: if multiple bcl files are detected then cellranger_count design file is not created
 
 # v1.1.4
 **User Facing**
