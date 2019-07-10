@@ -54,3 +54,10 @@ To Run:
 
 
 [**CHANGELOG**](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/CHANGELOG.md)
+
+Credits
+-------
+This worklow is was developed jointly with the [Bioinformatic Core Facility (BICF), Department of Bioinformatics](http://www.utsouthwestern.edu/labs/bioinformatics/)
+
+
+Please cite in publications: Pipeline was developed by BICF from funding provided by **Cancer Prevention and Research Institute of Texas (RP150596)**.

@@ -4,7 +4,7 @@
   * Anaconda (Anaconda Software Distribution, [https://anaconda.com](https://anaconda.com))
 
 2. **pigz**:
-  * parallel implementation of gzip [https://zlib.net/pigz/](https://zlib.net/pigz/)
+  * Parallel implementation of gzip [https://zlib.net/pigz/](https://zlib.net/pigz/)
 
 3. **bcl2fastq**:
   * Ilumina's bcl2fastq [https://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html](https://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html)
@@ -17,3 +17,6 @@
 
 5. **MultiQc**:
   * Ewels P., Magnusson M., Lundin S. and Käller M. 2016. MultiQC: Summarize analysis results for multiple tools and samples in a single report. Bioinformatics 32(19): 3047–3048. doi:[10.1093/bioinformatics/btw354](https://dx.doi.org/10.1093/bioinformatics/btw354)
+
+6. **Nextflow**:
+  * Di Tommaso P., Chatzou M., Floden E. W., Barja P. P., Palumbo E., and Notredame C. 2017. Nextflow enables reproducible computational workflows. Nature biotechnology 35(4): 316. doi:[10.1038/nbt.3820](https://doi.org/10.1038/nbt.3820)
