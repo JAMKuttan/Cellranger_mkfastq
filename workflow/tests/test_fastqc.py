@@ -12,5 +12,5 @@ test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
 @pytest.mark.fastqc
 def test_fastqc_output():
     fastqcs = glob.glob('/../../test/mkfastq/*/outs/fastq_path/*/*/*.fastq.gz', recursive=True)
-    for f in fastqcs
-    assert os.path.exists(os.path.join(test_output_path, f))
+    for f in fastqcs:
+        assert os.path.exists(os.path.join(test_output_path, f))
