@@ -28,6 +28,7 @@ simple_1FC:
     - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
+    - pytest -m fastqc
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
@@ -43,6 +44,7 @@ simple_2FC:
   stage: simple
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
+    - pytest -m fastqc
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
