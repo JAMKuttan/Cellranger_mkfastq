@@ -6,7 +6,7 @@ from io import StringIO
 import os
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-                '/../../test/misc/versions/**/'
+                '/../output/misc/versions/**/'
 
 @pytest.mark.versions
 def test_versions():

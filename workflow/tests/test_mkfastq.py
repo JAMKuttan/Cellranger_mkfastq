@@ -7,10 +7,10 @@ import os
 import glob
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-		'/../../test/mkfastq/**/outs/fastq_path/**/**/'
+		'/../output/mkfastq/**/outs/fastq_path/**/**/'
 
 @pytest.mark.mkfastq
 def test_mkfastq():
-    fastqcs = glob.glob('/../../test/mkfastq/*/outs/fastq_path/*/*/*.fastq.gz', recursive=True)
+    fastqcs = glob.glob('/../output/mkfastq/*/outs/fastq_path/*/*/*.fastq.gz', recursive=True)
     for f in fastqcs:
         assert os.path.exists(os.path.join(test_output_path, f))
