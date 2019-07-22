@@ -11,4 +11,5 @@ test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
 @pytest.mark.design
 def test_design():
     design_file = os.path.join(test_output_path, 'design.checked.csv')
+    print(design_file)
     assert os.path.exists(design_file)
