@@ -6,7 +6,7 @@ from io import StringIO
 import os
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-                '/../output/misc/checkDesignFile/**/'
+                '/../output/misc/checkDesignFile/run/'
 
 @pytest.mark.design
 def test_design():
