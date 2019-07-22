@@ -1,6 +1,7 @@
 before_script:
   - module load astrocyte
   - module load python/3.6.1-2-anaconda
+  - pip install --user pytest-pythonpath==0.7.1 pytest-cov==2.5.1
   - module load nextflow/0.31.1_Ignite
   - mkdir -p test_data/simple1
   - mkdir -p test_data/simple2
@@ -28,6 +29,7 @@ simple_1FC:
     - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
+    - pytest -m simple1
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
@@ -43,6 +45,7 @@ simple_2FC:
   stage: simple
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
+    - pytest -m simple2
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
