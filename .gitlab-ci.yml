@@ -29,12 +29,7 @@ simple_1FC:
     - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
-    - pytest -m design
-    - pytest -m untarBCL
-    - pytest -m mkfastq
-    - pytest -m fastqc
-    - pytest -m versions
-    - pytest -m multiqc
+    - pytest -m simple1
   artifacts:
     name: "$CI_JOB_NAME"
     when: always
@@ -50,12 +45,7 @@ simple_2FC:
   stage: simple
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
-    - pytest -m design
-    - pytest -m untarBCL
-    - pytest -m mkfastq
-    - pytest -m fastqc
-    - pytest -m versions
-    - pytest -m multiqc
+    - pytest -m simple2
   artifacts:
     name: "$CI_JOB_NAME"
     when: always

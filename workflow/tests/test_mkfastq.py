@@ -4,11 +4,15 @@ import pytest
 import pandas as pd
 from io import StringIO
 import os
-import glob
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-		'/../output/mkfastq/cellranger-tiny-bcl-1_2_0/outs/'
+		'/../output/mkfastq/'
 
-@pytest.mark.mkfastq
-def test_mkfastq():
-    assert os.path.exists(test_output_path)
+@pytest.mark.simple1
+def test_simple1_mkfastq():
+    assert os.path.exists(os.path.join(test_output_path, 'cellranger-tiny-bcl-1_2_0', 'outs'))
+
+@pytest.mark.simple2
+def test_simple2_mkfastq():
+    assert os.path.exists(os.path.join(test_output_path, 'cellranger-tiny-bcl-1_2_0-1', 'outs'))
+    assert os.path.exists(os.path.join(test_output_path, 'cellranger-tiny-bcl-1_2_0-2', 'outs'))
