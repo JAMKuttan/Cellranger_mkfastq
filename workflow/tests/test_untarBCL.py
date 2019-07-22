@@ -6,7 +6,7 @@ from io import StringIO
 import os
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-                '/../output/untarBCL/**/'
+                '/../output/untarBCL/cellranger-tiny-bcl-1_2_0/'
 
 @pytest.mark.untarBCL
 def test_untarBCL():

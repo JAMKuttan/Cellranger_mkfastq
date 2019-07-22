@@ -6,10 +6,8 @@ from io import StringIO
 import os
 
 test_output_path = os.path.dirname(os.path.abspath(__file__)) + \
-                '/../output/misc/fastqc/**/**/'
+                '/../output/misc/fastqc/run/cellranger-tiny-bcl-1_2_0/'
 
 @pytest.mark.fastqc
 def test_fastqc():
-    fastqcs = glob.glob('/../output/misc/fastqc/*/*/*fastqc.zip', recursive=True)
-    for f in fastqcs:
-        assert os.path.exists(os.path.join(test_output_path, f))
+    assert os.path.exists(test_output_path)
