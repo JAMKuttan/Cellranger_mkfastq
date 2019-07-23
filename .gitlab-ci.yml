@@ -19,7 +19,7 @@ astrocyte_check:
   artifacts:
     expire_in: 2 days
   retry:
-    max: 2
+    max: 1
     when:
       - always
 
@@ -37,7 +37,7 @@ simple_1FC:
       - .nextflow.log
     expire_in: 2 days
   retry:
-    max: 2
+    max: 1
     when:
       - always
 
@@ -53,6 +53,6 @@ simple_2FC:
       - .nextflow.log
     expire_in: 2 days
   retry:
-    max: 2
+    max: 1
     when:
       - always
