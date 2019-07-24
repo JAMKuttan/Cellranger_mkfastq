@@ -9,7 +9,7 @@
 # A unique identifier for the workflow package, text/underscores only
 name: 'cellranger_mkfastq'
 # Who wrote this?
-author: 'Gervaise H. Henry, Venkat Malladi, and Jon Gesell'
+author: 'Gervaise H. Henry, Jon Gesell, Jeremy Mathews, and Venkat Malladi'
 # A contact email address for questions
 email: 'bicf@utsouthwestern.edu'
 # A more informative title for the workflow package
@@ -85,13 +85,13 @@ workflow_parameters:
     required: true
     description: |
       One or more input tarball (+/- gunzip) basecall files (bcl) from a sequencing of 10x single-cell expereiment (can be .tar or .tar.gz).
-    regex: ".*tar*"
+    regex: ".*\\.tar*"
     min: 1
 
   - id: designFile
     type: file
     required: true
-    regex: ".*csv"
+    regex: ".*\\.csv"
     description: |
       A design file listing lane, sample, corresponding index.
 

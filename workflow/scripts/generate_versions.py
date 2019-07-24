@@ -57,7 +57,7 @@ def check_files(files):
 
     software_files = np.array(list(SOFTWARE_REGEX.values()))[:,0]
 
-    extra_files =  set(files) - set(software_files)
+    extra_files = set(files) - set(software_files)
 
     if len(extra_files) > 0:
             logger.error('Missing regex: %s', list(extra_files))
