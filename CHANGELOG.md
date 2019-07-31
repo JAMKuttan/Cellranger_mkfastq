@@ -1,6 +1,7 @@
 # v1.3.0 (in development)
 **User Facing**
 * Change Cellranger Version to 3.1.0
+* Add CI artifacts
 
 **Background**
 
