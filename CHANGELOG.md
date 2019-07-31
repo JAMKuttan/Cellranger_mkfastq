@@ -1,9 +1,9 @@
 # v1.3.0 (in development)
 **User Facing**
 * Change Cellranger Version to 3.1.0
-* Add CI artifacts
 
 **Background**
+* Add CI artifacts
 
 *Known Bugs*
 * cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
