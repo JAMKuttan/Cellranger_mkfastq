@@ -14,6 +14,9 @@ stages:
 
 astrocyte_check:
   stage: astrocyte
+  except:
+    changes:
+      - "*.md"
   script:
     - astrocyte_cli check ../cellranger_mkfastq
   artifacts:
@@ -26,9 +29,9 @@ astrocyte_check:
 simple_1FC:
   stage: simple
   except:
-    - tags
     changes:
       - "*.md"
+    - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
     - pytest -m simple1
