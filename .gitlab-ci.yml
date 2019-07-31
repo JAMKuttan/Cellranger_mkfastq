@@ -35,7 +35,7 @@ simple_1FC:
     when: always
     paths:
       - .nextflow.log
-      - workflow/output/multiqc/test/multiqc_report.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -52,7 +52,7 @@ simple_2FC:
     when: always
     paths:
       - .nextflow.log
-      - workflow/output/multiqc/test/multiqc_report.html
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
