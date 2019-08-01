@@ -13,7 +13,6 @@
 * If multiple flowcells (tar'd) files are inputted then there will be multiple fastq's by the same name, currently dealing with that name conflict is not tractable
     * note: if multiple bcl files are detected then cellranger_count design file is not created
 
-
 # v1.2.0
 **User Facing**
 * Add references to of tools to mutiQC report
