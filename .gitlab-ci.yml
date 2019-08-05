@@ -25,13 +25,6 @@ astrocyte_check:
 
 simple_1FC:
   stage: simple
-  only:
-    - branches
-  except:
-    changes:
-      - "**/*.md"
-    refs:
-      - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
     - pytest -m simple1
@@ -49,9 +42,6 @@ simple_1FC:
 
 simple_2FC:
   stage: simple
-  except:
-    changes:
-      - "**/*.md"
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple2/*.tar.gz" --designFile "test_data/simple2/cellranger-tiny-bcl-simple-1_2_0.csv"
     - pytest -m simple2
