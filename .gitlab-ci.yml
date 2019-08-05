@@ -25,6 +25,8 @@ astrocyte_check:
 
 simple_1FC:
   stage: simple
+  only:
+    - branches
   except:
     changes:
       - "**/*.md"
