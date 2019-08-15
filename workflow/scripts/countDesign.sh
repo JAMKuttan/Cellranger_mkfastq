@@ -1,5 +1,11 @@
 #!/bin/bash
 #countDesign.sh
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
+
 
 fastqs=($(ls *.fastq.gz))
 design=$(ls *.csv)
