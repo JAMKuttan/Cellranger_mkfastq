@@ -6,8 +6,6 @@
 #* --------------------------------------------------------------------------
 #*
 
-'''Check if design file is correctly formatted and matches files list.'''
-
 import argparse
 import logging
 import pandas as pd
@@ -16,8 +14,6 @@ EPILOG = '''
 For more details:
         %(prog)s --help
 '''
-
-# SETTINGS
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
