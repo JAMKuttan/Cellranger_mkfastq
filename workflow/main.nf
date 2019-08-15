@@ -1,7 +1,12 @@
 #!/usr/bin/env nextflow
-
-// Path to an input file, or a pattern for multiple inputs
-// Note - $baseDir is the location of this workflow file main.nf
+/*
+main.nf
+*
+* --------------------------------------------------------------------------
+* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+* --------------------------------------------------------------------------
+*
+*/
 
 
 // Define Input variables
