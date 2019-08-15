@@ -8,7 +8,6 @@ main.nf
 *
 */
 
-
 // Define Input variables
 params.name = "run"
 params.bcl = "${baseDir}/../test_data/*.tar.gz"
@@ -17,14 +16,12 @@ params.outDir = "${baseDir}/output"
 params.multiqcConf = "${baseDir}/conf/multiqc_config.yaml"
 params.references = "${baseDir}/../docs/references.md"
 
-
 // Define List of Files
 tarList = Channel
   .fromPath( params.bcl )
 bclCount = Channel
   .fromPath( params.bcl )
   .count()
-
 
 // Define regular variables
 name = params.name
