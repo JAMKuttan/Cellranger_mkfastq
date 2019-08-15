@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#check_design.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 '''Check if design file is correctly formatted and matches files list.'''
 
