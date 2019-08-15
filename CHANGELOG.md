@@ -1,18 +1,5 @@
 # v1.3.1 (in development)
 **User Facing**
-
-**Background**
-* Add multiqc output to atrifacts
-
-*Known Bugs*
-* cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
-    * note: 10x doesn't check github issues, emailed instead
-    * note: pipeline checks for spaces and exits prematurely if found
-* If multiple flowcells (tar'd) files are inputted then there will be multiple fastq's by the same name, currently dealing with that name conflict is not tractable
-    * note: if multiple bcl files are detected then cellranger_count design file is not created
-
-# v1.3.0
-**User Facing**
 * Change Cellranger Version to 3.1.0
 * Fix countDesign to take multiple samples
 * Add MIT License
