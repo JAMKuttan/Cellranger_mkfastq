@@ -1,7 +1,8 @@
-# v1.3.0 (in development)
+# v1.3.1 (in development)
 **User Facing**
 * Change Cellranger Version to 3.1.0
 * Fix countDesign to take multiple samples
+* Add MIT License
 
 **Background**
 * Add CI artifacts
