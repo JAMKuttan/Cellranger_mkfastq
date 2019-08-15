@@ -1,8 +1,12 @@
 #!/usr/bin/env nextflow
-
-// Path to an input file, or a pattern for multiple inputs
-// Note - $baseDir is the location of this workflow file main.nf
-
+/*
+main.nf
+*
+* --------------------------------------------------------------------------
+* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+* --------------------------------------------------------------------------
+*
+*/
 
 // Define Input variables
 params.name = "run"
@@ -12,14 +16,12 @@ params.outDir = "${baseDir}/output"
 params.multiqcConf = "${baseDir}/conf/multiqc_config.yaml"
 params.references = "${baseDir}/../docs/references.md"
 
-
 // Define List of Files
 tarList = Channel
   .fromPath( params.bcl )
 bclCount = Channel
   .fromPath( params.bcl )
   .count()
-
 
 // Define regular variables
 name = params.name
@@ -81,7 +83,7 @@ process mkfastq {
   tag "${bcl.baseName}"
   queue '128GB,256GB,256GBv1,384GB'
   publishDir "${outDir}/${task.process}", mode: 'copy', pattern: "{*/outs/**/*.fastq.gz}"
-  module 'cellranger/3.0.2:bcl2fastq/2.19.1'
+  module 'cellranger/3.1.0:bcl2fastq/2.19.1'
 
   input:
     each bcl from bclPaths.collect()
@@ -156,7 +158,7 @@ process versions {
 
   tag "${name}"
   publishDir "${outDir}/misc/${task.process}/${name}", mode: 'copy'
-  module 'python/3.6.1-2-anaconda:cellranger/3.0.2:bcl2fastq/2.19.1:fastqc/0.11.5:pandoc/2.7'
+  module 'python/3.6.1-2-anaconda:cellranger/3.1.0:bcl2fastq/2.19.1:fastqc/0.11.5:pandoc/2.7'
 
   input:
 

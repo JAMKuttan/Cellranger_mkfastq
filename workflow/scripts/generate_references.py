@@ -1,12 +1,10 @@
 #!/usr/bin/env python
-
-#
-# * --------------------------------------------------------------------------
-# * Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_count/LICENSE.md)
-# * --------------------------------------------------------------------------
-#
-
-'''Make header for HTML of references.'''
+#generate_references.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 import argparse
 import subprocess

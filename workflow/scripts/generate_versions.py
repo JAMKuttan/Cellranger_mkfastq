@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#generate_versions.py
+#*
+#* --------------------------------------------------------------------------
+#* Licensed under MIT (https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/LICENSE)
+#* --------------------------------------------------------------------------
+#*
 
 '''Make YAML of software versions.'''
 
@@ -14,8 +19,6 @@ EPILOG = '''
 For more details:
         %(prog)s --help
 '''
-
-# SETTINGS
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())

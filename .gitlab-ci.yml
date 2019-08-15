@@ -25,8 +25,6 @@ astrocyte_check:
 
 simple_1FC:
   stage: simple
-  except:
-    - tags
   script:
     - nextflow run workflow/main.nf --bcl "test_data/simple1/*.tar.gz" --designFile "test_data/simple1/cellranger-tiny-bcl-simple-1_2_0.csv"
     - pytest -m simple1
@@ -35,6 +33,7 @@ simple_1FC:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
@@ -51,6 +50,7 @@ simple_2FC:
     when: always
     paths:
       - .nextflow.log
+      - workflow/output/multiqc/run/multiqc_report.html
     expire_in: 2 days
   retry:
     max: 1
