@@ -4,7 +4,7 @@ library(shinyFiles)
 setwd("../")
 
 ui <- fluidPage(
-    includeHTML("workflow/output/multiqc/test/multiqc_report.html")
+    includeHTML(Sys.glob("workflow/output/multiqc/*/multiqc_report.html"))
 )
 
 server <- function(input, output, session) {}
