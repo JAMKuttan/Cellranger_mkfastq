@@ -50,7 +50,11 @@ process checkDesignFile {
     """
     hostname
     ulimit -a
-    python3 ${baseDir}/scripts/check_design.py -d ${designLocation}
+    noSpaceDesign=\$(echo "${designLocation}" | tr -d ' ')
+    if [[ "\${noSpaceDesign}" != "${designLocation}" ]]; then
+      mv "${designLocation}" "\${noSpaceDesign}"
+    fi
+    python3 ${baseDir}/scripts/check_design.py -d \${noSpaceDesign}
     """
 
 }
