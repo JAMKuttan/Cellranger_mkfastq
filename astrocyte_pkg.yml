@@ -93,7 +93,7 @@ workflow_parameters:
     required: true
     regex: ".*\\.csv"
     description: |
-      A design file listing lane, sample, corresponding index.
+      A design file listing lane, sample, corresponding index (last characters represent well position of 96-well plate). [Current sample barcode IDs](https://s3-us-west-2.amazonaws.com/10x.files/supp/cell-exp/chromium-shared-sample-indexes-plate.csv)
 
 
 # -----------------------------------------------------------------------------
