@@ -36,6 +36,8 @@ To Run:
     * column 1 = "Lane" (number of lanes to demultiplex, */** for all lanes)
     * column 2 = "Sample" (sample name)
     * column 3 = "Index" (10x sample index barcode, eg SI-GA-A1)
+    * Last character set in Index references the well position of the 96-well plate that the sample barcode kit is sold in.
+    * [Current sample barcode IDs](https://s3-us-west-2.amazonaws.com/10x.files/supp/cell-exp/chromium-shared-sample-indexes-plate.csv)
     * can have repeated "Sample" if there are multiple fastq R1/R2 pairs for the samples
     * can be downloaded [HERE](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/master/docs/design.csv)
     * eg: **--designFile '/project/shared/bicf_workflow_ref/workflow_testdata/cellranger/cellranger_mkfastq/simple/cellranger-tiny-bcl-simple-1_2_0.csv'**
@@ -50,7 +52,7 @@ To Run:
 
 | Lane | Sample      | Index     |
 |------|-------------|-----------|
-| *    | test_sample | SI-P03-C9 |
+| *    | test_sample | SI-GA-C9 |
 
 
 [**CHANGELOG**](https://git.biohpc.swmed.edu/BICF/Astrocyte/cellranger_mkfastq/blob/develop/CHANGELOG.md)

@@ -3,6 +3,8 @@
 * Change Cellranger Version to 3.1.0
 * Fix countDesign to take multiple samples
 * Add MIT License
+* Check Design File for spaces in name
+* Update design example, README, and astrocyte.yml with current barcode IDs
 
 **Background**
 * Add CI artifacts

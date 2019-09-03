@@ -31,7 +31,7 @@ To Run:
 
     | Lane | Sample      | Index     |
     |------|-------------|-----------|
-    | *    | test_sample | SI-P03-C9 |
+    | *    | test_sample | SI-GA-C9 |
     
 
 
