@@ -30,9 +30,12 @@ if [ "${folder}" != "${folder1}" ]; then
 fi
 
 name=$(echo ${tar} | rev | cut -f1 -d '.' | rev)
-bclPath=$(tar -tf ${tar} | grep RTAComplete.txt | rev | cut -f2- | rev)
+bclPath=$(tar -tf ${tar} | grep RTAComplete.txt | rev | cut -f2- -d '/' | rev)
+toStrip="${bclPath//[^\/]}"
+toStrip=$(echo "${#toStrip}")
+
 
 if [ "${name}" == "gz" ]; then 
-  tar -xvf ${tar} ${bclPath} -I pigz
-  else tar -xvf ${tar} ${bclPath}
+  tar -xvf ${tar} --strip-components=${toStrip} ${bclPath} -I pigz
+  else tar -xvf ${tar} --strip-components=${toStrip} ${bclPath}
 fi
