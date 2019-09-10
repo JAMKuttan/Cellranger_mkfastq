@@ -30,8 +30,9 @@ if [ "${folder}" != "${folder1}" ]; then
 fi
 
 name=$(echo ${tar} | rev | cut -f1 -d '.' | rev)
+bclPath=$(tar -tf ${tar} | grep RTAComplete.txt | rev | cut -f2- | rev)
 
 if [ "${name}" == "gz" ]; then 
-  tar -xvf ${tar} -I pigz
-  else tar -xvf ${tar}
+  tar -xvf ${tar} ${bclPath} -I pigz
+  else tar -xvf ${tar} ${bclPath}
 fi
