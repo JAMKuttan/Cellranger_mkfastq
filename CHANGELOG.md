@@ -8,6 +8,7 @@
 
 **Background**
 * Add CI artifacts
+* Add Nextflow Tower integration into CI (GHH's profile)
 
 *Known Bugs*
 * cellranger mkfastq will not accept spaces in path for run param even if quoted, issue raised on 10XGenomics/cellranger github issue [#31](https://github.com/10XGenomics/cellranger/issues/31)
